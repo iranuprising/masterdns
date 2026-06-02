@@ -76,7 +76,7 @@ func New(name, rawLevel string) *Logger {
 
 func NewWithFile(name, rawLevel, filePath string) *Logger {
 	appName := "[" + name + "]"
-	var consoleWriter io.Writer = os.Stdout
+	var consoleWriter io.Writer = os.Stderr
 	var fileWriter *os.File
 
 	if filePath != "" {
@@ -128,9 +128,8 @@ func (l *Logger) logf(level int, format string, args ...any) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
-	ts := time.Now().Format("2006/01/02 15:04:05")
-
 	if l.fileWriter != nil {
+		ts := time.Now().Format("2006/01/02 15:04:05")
 		fileLine := ts + " " + plainLevelTexts[level] + " " + plainMsg + "\n"
 		if _, err := io.WriteString(l.fileWriter, fileLine); err != nil {
 			_ = l.fileWriter.Close()
@@ -139,21 +138,17 @@ func (l *Logger) logf(level int, format string, args ...any) {
 	}
 
 	if l.consoleWriter != nil {
-		appName := l.appNameText
-		levelText := plainLevelTexts[level]
 		finalMsg := plainMsg
-
 		if l.color {
 			if strings.IndexByte(msg, '<') >= 0 {
 				finalMsg = renderColorTags(msg)
 			} else {
 				finalMsg = msg
 			}
-			appName = l.appNameColored
-			levelText = coloredLevelTexts[level]
 		}
 
-		consoleLine := ts + " " + appName + " " + levelText + " " + finalMsg + "\n"
+		// Mobile focused: just the message, no TS/Name/Level
+		consoleLine := finalMsg + "\n"
 		_, _ = io.WriteString(l.consoleWriter, consoleLine)
 	}
 }
@@ -215,7 +210,7 @@ func shouldUseColor() bool {
 	if strings.TrimSpace(os.Getenv("FORCE_COLOR")) != "" {
 		return true
 	}
-	return detectColorSupport(os.Stdout)
+	return detectColorSupport(os.Stderr)
 }
 
 func renderColorTags(text string) string {

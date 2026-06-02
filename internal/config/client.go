@@ -20,7 +20,7 @@ import (
 
 	"github.com/BurntSushi/toml"
 
-	"masterdnsvpn-go/internal/compression"
+	"masterdns-go/internal/compression"
 )
 
 type ClientConfig struct {
@@ -121,6 +121,8 @@ type ClientConfig struct {
 type ClientConfigOverrides struct {
 	ResolversFilePath *string
 	Values            map[string]any
+	// Resolvers, when non-nil, replaces the resolvers loaded from the resolvers file.
+	Resolvers []ResolverAddress
 }
 
 type ClientConfigFlagBinder struct {
@@ -295,6 +297,47 @@ func LoadClientConfigWithOverrides(filename string, overrides ClientConfigOverri
 	if overrides.ResolversFilePath != nil {
 		cfg.ResolversFilePath = strings.TrimSpace(*overrides.ResolversFilePath)
 	}
+
+	if len(overrides.Resolvers) > 0 {
+		cfg.Resolvers = overrides.Resolvers
+		rm := make(map[string]int, len(overrides.Resolvers))
+		for _, r := range overrides.Resolvers {
+			rm[r.IP] = r.Port
+		}
+		cfg.ResolverMap = rm
+	}
+
+	if len(overrides.Values) > 0 {
+		if err := applyClientConfigOverrideValues(&cfg, overrides.Values); err != nil {
+			return cfg, err
+		}
+		if _, ok := overrides.Values["TunnelProcessWorkers"]; ok {
+			cfg.explicitTunnelProcessWorkers = true
+		}
+	}
+
+	return finalizeClientConfig(cfg)
+}
+
+func LoadClientConfigWithString(content string, overrides ClientConfigOverrides) (ClientConfig, error) {
+	var cfg ClientConfig
+	if _, err := toml.Decode(content, &cfg); err != nil {
+		return cfg, fmt.Errorf("decode client config string: %w", err)
+	}
+
+	if overrides.ResolversFilePath != nil {
+		cfg.ResolversFilePath = strings.TrimSpace(*overrides.ResolversFilePath)
+	}
+
+	if len(overrides.Resolvers) > 0 {
+		cfg.Resolvers = overrides.Resolvers
+		rm := make(map[string]int, len(overrides.Resolvers))
+		for _, r := range overrides.Resolvers {
+			rm[r.IP] = r.Port
+		}
+		cfg.ResolverMap = rm
+	}
+
 	if len(overrides.Values) > 0 {
 		if err := applyClientConfigOverrideValues(&cfg, overrides.Values); err != nil {
 			return cfg, err
@@ -479,15 +522,16 @@ func finalizeClientConfig(cfg ClientConfig) (ClientConfig, error) {
 
 	cfg.ResolversFilePath = strings.TrimSpace(cfg.ResolversFilePath)
 
-	resolvers, resolverMap, err := LoadClientResolvers(cfg.ResolversPath())
-	if err != nil {
-		return cfg, err
+	if len(cfg.Resolvers) == 0 {
+		resolvers, resolverMap, err := LoadClientResolvers(cfg.ResolversPath())
+		if err != nil {
+			return cfg, err
+		}
+		cfg.Resolvers = resolvers
+		cfg.ResolverMap = resolverMap
 	}
-	cfg.Resolvers = resolvers
-	cfg.ResolverMap = resolverMap
 	return cfg, nil
 }
-
 func (c ClientConfig) ResolversPath() string {
 	if c.ResolversFilePath != "" {
 		if filepath.IsAbs(c.ResolversFilePath) {

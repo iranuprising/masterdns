@@ -7,7 +7,7 @@
 
 package dnsparser
 
-import Enums "masterdnsvpn-go/internal/enums"
+import Enums "masterdns-go/internal/enums"
 
 func IsSupportedTunnelDNSQuery(qType uint16, qClass uint16) bool {
 	if qClass != Enums.DNSQ_CLASS_IN {

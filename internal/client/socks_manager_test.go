@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"masterdnsvpn-go/internal/config"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/config"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 func TestSupportsSOCKS4Policy(t *testing.T) {

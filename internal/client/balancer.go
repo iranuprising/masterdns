@@ -16,8 +16,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/logger"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/logger"
 )
 
 const (
@@ -39,6 +39,7 @@ type Connection struct {
 	ResolverLabel     string
 	Key               string
 	IsValid           bool
+	Tested            bool
 	UploadMTUBytes    int
 	UploadMTUChars    int
 	DownloadMTUBytes  int
@@ -2156,3 +2157,11 @@ func xorshift64(v uint64) uint64 {
 	v ^= v << 17
 	return v
 }
+
+func (b *Balancer) GetConnection(key string) *Connection {
+	b.mu.RLock(); defer b.mu.RUnlock()
+	idx, ok := b.indexByKey[key]
+	if !ok { return nil }
+	return &b.connections[idx]
+}
+func (b *Balancer) SetMinValidResolvers(n int) {}

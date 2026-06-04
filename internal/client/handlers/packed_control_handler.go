@@ -10,8 +10,8 @@ package handlers
 import (
 	"net"
 
-	Enums "masterdnsvpn-go/internal/enums"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	Enums "masterdns-go/internal/enums"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 func init() {

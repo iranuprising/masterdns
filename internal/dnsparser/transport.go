@@ -16,10 +16,10 @@ import (
 	"sync"
 	"sync/atomic"
 
-	baseCodec "masterdnsvpn-go/internal/basecodec"
-	"masterdnsvpn-go/internal/compression"
-	Enums "masterdnsvpn-go/internal/enums"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	baseCodec "masterdns-go/internal/basecodec"
+	"masterdns-go/internal/compression"
+	Enums "masterdns-go/internal/enums"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 var (

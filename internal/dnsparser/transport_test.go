@@ -14,9 +14,9 @@ import (
 	"strings"
 	"testing"
 
-	"masterdnsvpn-go/internal/compression"
-	Enums "masterdnsvpn-go/internal/enums"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/compression"
+	Enums "masterdns-go/internal/enums"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 func TestBuildTunnelQuestionNameSplitsLabels(t *testing.T) {

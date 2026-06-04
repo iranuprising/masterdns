@@ -14,14 +14,14 @@ import (
 	"testing"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	"masterdnsvpn-go/internal/config"
-	DnsParser "masterdnsvpn-go/internal/dnsparser"
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/logger"
-	"masterdnsvpn-go/internal/mlq"
-	"masterdnsvpn-go/internal/security"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/arq"
+	"masterdns-go/internal/config"
+	DnsParser "masterdns-go/internal/dnsparser"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/logger"
+	"masterdns-go/internal/mlq"
+	"masterdns-go/internal/security"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 func createTestClient(t *testing.T) *Client {

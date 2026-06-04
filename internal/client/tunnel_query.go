@@ -10,9 +10,9 @@
 package client
 
 import (
-	DnsParser "masterdnsvpn-go/internal/dnsparser"
-	Enums "masterdnsvpn-go/internal/enums"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	DnsParser "masterdns-go/internal/dnsparser"
+	Enums "masterdns-go/internal/enums"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 type preparedTunnelDomain struct {

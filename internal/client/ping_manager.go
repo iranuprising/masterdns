@@ -14,7 +14,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	Enums "masterdnsvpn-go/internal/enums"
+	Enums "masterdns-go/internal/enums"
 )
 
 type PingManager struct {

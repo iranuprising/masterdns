@@ -14,7 +14,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"masterdnsvpn-go/internal/logger"
+	"masterdns-go/internal/logger"
 )
 
 type deferredSessionLane struct {

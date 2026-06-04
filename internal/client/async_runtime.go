@@ -16,11 +16,11 @@ import (
 	"net"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	"masterdnsvpn-go/internal/client/handlers"
-	DnsParser "masterdnsvpn-go/internal/dnsparser"
-	Enums "masterdnsvpn-go/internal/enums"
-	fragmentStore "masterdnsvpn-go/internal/fragmentstore"
+	"masterdns-go/internal/arq"
+	"masterdns-go/internal/client/handlers"
+	DnsParser "masterdns-go/internal/dnsparser"
+	Enums "masterdns-go/internal/enums"
+	fragmentStore "masterdns-go/internal/fragmentstore"
 )
 
 const clientRXDropLogInterval = 2 * time.Second

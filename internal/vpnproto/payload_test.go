@@ -11,8 +11,8 @@ import (
 	"bytes"
 	"testing"
 
-	"masterdnsvpn-go/internal/compression"
-	Enums "masterdnsvpn-go/internal/enums"
+	"masterdns-go/internal/compression"
+	Enums "masterdns-go/internal/enums"
 )
 
 func TestPreparePayloadCompressesSupportedPacket(t *testing.T) {

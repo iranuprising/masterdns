@@ -8,7 +8,7 @@
 package vpnproto
 
 import (
-	Enums "masterdnsvpn-go/internal/enums"
+	Enums "masterdns-go/internal/enums"
 	"strconv"
 	"strings"
 )

@@ -17,8 +17,8 @@ import (
 	"net"
 	"time"
 
-	"masterdnsvpn-go/internal/dnsparser"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/dnsparser"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 const (

@@ -18,11 +18,11 @@ import (
 	"strings"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/logger"
-	"masterdnsvpn-go/internal/version"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/arq"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/logger"
+	"masterdns-go/internal/version"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 // randomBytes generates random bytes using a cryptographically secure PRNG.

@@ -16,13 +16,13 @@ import (
 	"sync/atomic"
 	"time"
 
-	"masterdnsvpn-go/internal/config"
-	dnsCache "masterdnsvpn-go/internal/dnscache"
-	domainMatcher "masterdnsvpn-go/internal/domainmatcher"
-	fragmentStore "masterdnsvpn-go/internal/fragmentstore"
-	"masterdnsvpn-go/internal/logger"
-	"masterdnsvpn-go/internal/security"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/config"
+	dnsCache "masterdns-go/internal/dnscache"
+	domainMatcher "masterdns-go/internal/domainmatcher"
+	fragmentStore "masterdns-go/internal/fragmentstore"
+	"masterdns-go/internal/logger"
+	"masterdns-go/internal/security"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 const (

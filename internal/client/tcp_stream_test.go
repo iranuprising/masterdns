@@ -12,10 +12,10 @@ import (
 	"testing"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	"masterdnsvpn-go/internal/config"
-	Enums "masterdnsvpn-go/internal/enums"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/arq"
+	"masterdns-go/internal/config"
+	Enums "masterdns-go/internal/enums"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 func buildTCPTestClient() *Client {

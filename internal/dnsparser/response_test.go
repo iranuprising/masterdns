@@ -11,7 +11,7 @@ import (
 	"encoding/binary"
 	"testing"
 
-	Enums "masterdnsvpn-go/internal/enums"
+	Enums "masterdns-go/internal/enums"
 )
 
 func TestBuildEmptyNoErrorResponsePreservesIDAndQuestion(t *testing.T) {

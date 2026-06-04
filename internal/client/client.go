@@ -17,15 +17,15 @@ import (
 	"sync/atomic"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	"masterdnsvpn-go/internal/config"
-	dnsCache "masterdnsvpn-go/internal/dnscache"
-	Enums "masterdnsvpn-go/internal/enums"
-	fragmentStore "masterdnsvpn-go/internal/fragmentstore"
-	"masterdnsvpn-go/internal/logger"
-	"masterdnsvpn-go/internal/mlq"
-	"masterdnsvpn-go/internal/security"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/arq"
+	"masterdns-go/internal/config"
+	dnsCache "masterdns-go/internal/dnscache"
+	Enums "masterdns-go/internal/enums"
+	fragmentStore "masterdns-go/internal/fragmentstore"
+	"masterdns-go/internal/logger"
+	"masterdns-go/internal/mlq"
+	"masterdns-go/internal/security"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 const (
@@ -37,6 +37,13 @@ type Client struct {
 	log      *logger.Logger
 	codec    *security.Codec
 	balancer *Balancer
+	txTotalBytes atomic.Uint64
+	rxTotalBytes atomic.Uint64
+	mtuTotal atomic.Int32
+	mtuCompleted atomic.Int32
+	mtuValid atomic.Int32
+	mtuRejected atomic.Int32
+	MinValidResolvers int
 
 	successMTUChecks  bool
 	udpBufferPool     sync.Pool
@@ -559,3 +566,14 @@ func (c *Client) HandleErrorDrop(packet VpnProto.Packet) error {
 func (c *Client) HandleMTUResponse(packet VpnProto.Packet) error {
 	return nil
 }
+
+func (c *Client) GetTrafficStats() map[string]uint64 {
+	return map[string]uint64{
+		"bytesOut": c.txTotalBytes.Load(), "bytesIn": c.rxTotalBytes.Load(),
+		"mtuTotal": uint64(c.mtuTotal.Load()), "mtuCompleted": uint64(c.mtuCompleted.Load()),
+		"mtuValid": uint64(c.mtuValid.Load()), "mtuRejected": uint64(c.mtuRejected.Load()),
+	}
+}
+func (c *Client) GetValidResolvers() []string { return []string{} }
+func (c *Client) GetRejectedResolvers() []string { return []string{} }
+func (c *Client) SetMinValidResolvers(n int) { if c.balancer != nil { c.balancer.SetMinValidResolvers(n) } }

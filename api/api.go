@@ -3,8 +3,8 @@ package api
 import (
 	"context"
 	"fmt"
-	"masterdnsvpn-go/internal/client"
-	"masterdnsvpn-go/internal/config"
+	"masterdns-go/internal/client"
+	"masterdns-go/internal/config"
 	"sync"
 )
 

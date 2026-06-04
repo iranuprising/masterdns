@@ -15,12 +15,12 @@ import (
 	"sync"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	dnsCache "masterdnsvpn-go/internal/dnscache"
-	dnsParser "masterdnsvpn-go/internal/dnsparser"
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/netutil"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/arq"
+	dnsCache "masterdns-go/internal/dnscache"
+	dnsParser "masterdns-go/internal/dnsparser"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/netutil"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 type dnsFragmentKey struct {

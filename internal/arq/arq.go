@@ -19,7 +19,7 @@ import (
 	"syscall"
 	"time"
 
-	Enums "masterdnsvpn-go/internal/enums"
+	Enums "masterdns-go/internal/enums"
 )
 
 // StreamState mirrors Python's Stream_State enum

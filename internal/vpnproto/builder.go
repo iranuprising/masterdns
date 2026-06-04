@@ -7,7 +7,7 @@
 
 package vpnproto
 
-import "masterdnsvpn-go/internal/security"
+import "masterdns-go/internal/security"
 
 type BuildOptions struct {
 	SessionID       uint8

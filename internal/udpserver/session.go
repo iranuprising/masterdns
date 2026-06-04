@@ -19,10 +19,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/mlq"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/arq"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/mlq"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 var ErrSessionTableFull = errors.New("session table full")

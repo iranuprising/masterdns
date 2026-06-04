@@ -10,8 +10,8 @@ package domainmatcher
 import (
 	"testing"
 
-	DnsParser "masterdnsvpn-go/internal/dnsparser"
-	Enums "masterdnsvpn-go/internal/enums"
+	DnsParser "masterdns-go/internal/dnsparser"
+	Enums "masterdns-go/internal/enums"
 )
 
 func TestMatcherReturnsNoDataForUnauthorizedDomain(t *testing.T) {

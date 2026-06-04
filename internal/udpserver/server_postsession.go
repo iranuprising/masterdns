@@ -11,11 +11,11 @@ import (
 	"context"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/logger"
-	SocksProto "masterdnsvpn-go/internal/socksproto"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/arq"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/logger"
+	SocksProto "masterdns-go/internal/socksproto"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 type deferredDispatchResult uint8

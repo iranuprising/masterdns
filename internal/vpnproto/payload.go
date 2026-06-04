@@ -10,8 +10,8 @@ package vpnproto
 import (
 	"errors"
 
-	"masterdnsvpn-go/internal/compression"
-	"masterdnsvpn-go/internal/security"
+	"masterdns-go/internal/compression"
+	"masterdns-go/internal/security"
 )
 
 var ErrInvalidCompressedPayload = errors.New("invalid compressed vpn payload")

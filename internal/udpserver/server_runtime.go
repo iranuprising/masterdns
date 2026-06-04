@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"masterdnsvpn-go/internal/logger"
+	"masterdns-go/internal/logger"
 )
 
 func (s *Server) configureSocketBuffers(conn *net.UDPConn) {

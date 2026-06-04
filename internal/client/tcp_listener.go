@@ -16,7 +16,7 @@ import (
 	"sync"
 	"time"
 
-	"masterdnsvpn-go/internal/netutil"
+	"masterdns-go/internal/netutil"
 )
 
 type TCPListener struct {

@@ -18,11 +18,11 @@ import (
 	"sync"
 	"time"
 
-	"masterdnsvpn-go/internal/compression"
-	Enums "masterdnsvpn-go/internal/enums"
-	fragmentStore "masterdnsvpn-go/internal/fragmentstore"
-	"masterdnsvpn-go/internal/mlq"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	"masterdns-go/internal/compression"
+	Enums "masterdns-go/internal/enums"
+	fragmentStore "masterdns-go/internal/fragmentstore"
+	"masterdns-go/internal/mlq"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 var (

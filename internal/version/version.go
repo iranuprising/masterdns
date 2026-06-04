@@ -9,7 +9,7 @@ package version
 
 import "strings"
 
-// BuildVersion is set at link-time using -ldflags "-X masterdnsvpn-go/internal/version.BuildVersion=..."
+// BuildVersion is set at link-time using -ldflags "-X masterdns-go/internal/version.BuildVersion=..."
 var BuildVersion = "dev"
 
 // GetVersion returns the current build version.

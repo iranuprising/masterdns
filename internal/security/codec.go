@@ -20,8 +20,8 @@ import (
 
 	"golang.org/x/crypto/chacha20"
 
-	baseCodec "masterdnsvpn-go/internal/basecodec"
-	"masterdnsvpn-go/internal/config"
+	baseCodec "masterdns-go/internal/basecodec"
+	"masterdns-go/internal/config"
 )
 
 var (

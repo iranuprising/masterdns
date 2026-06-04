@@ -12,9 +12,9 @@ import (
 	"sync"
 	"time"
 
-	"masterdnsvpn-go/internal/arq"
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/mlq"
+	"masterdns-go/internal/arq"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/mlq"
 )
 
 // Stream_server encapsulates an ARQ instance and its transmit queue for a single stream.

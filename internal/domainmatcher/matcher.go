@@ -11,8 +11,8 @@ import (
 	"sort"
 	"strings"
 
-	DnsParser "masterdnsvpn-go/internal/dnsparser"
-	Enums "masterdnsvpn-go/internal/enums"
+	DnsParser "masterdns-go/internal/dnsparser"
+	Enums "masterdns-go/internal/enums"
 )
 
 type Action uint8

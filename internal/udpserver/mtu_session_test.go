@@ -5,10 +5,10 @@ import (
 	"sync"
 	"testing"
 
-	DnsParser "masterdnsvpn-go/internal/dnsparser"
-	domainMatcher "masterdnsvpn-go/internal/domainmatcher"
-	Enums "masterdnsvpn-go/internal/enums"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	DnsParser "masterdns-go/internal/dnsparser"
+	domainMatcher "masterdns-go/internal/domainmatcher"
+	Enums "masterdns-go/internal/enums"
+	VpnProto "masterdns-go/internal/vpnproto"
 )
 
 func TestHandleMTUDownRequestBuildsZeroFilledPayload(t *testing.T) {

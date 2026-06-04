@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"masterdnsvpn-go/internal/mlq"
+	"masterdns-go/internal/mlq"
 )
 
 func TestAsyncStreamDispatcherDrainsQueuedWorkAfterSingleWake(t *testing.T) {

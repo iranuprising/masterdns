@@ -14,7 +14,7 @@ import (
 	"os"
 	"strings"
 
-	"masterdnsvpn-go/internal/config"
+	"masterdns-go/internal/config"
 )
 
 type EncryptionKeyInfo struct {

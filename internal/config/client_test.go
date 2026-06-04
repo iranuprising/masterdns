@@ -14,7 +14,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"masterdnsvpn-go/internal/compression"
+	"masterdns-go/internal/compression"
 )
 
 func TestLoadClientConfigNormalizesAndLoadsResolvers(t *testing.T) {

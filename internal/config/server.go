@@ -20,7 +20,7 @@ import (
 
 	"github.com/BurntSushi/toml"
 
-	"masterdnsvpn-go/internal/compression"
+	"masterdns-go/internal/compression"
 )
 
 type ServerConfig struct {

@@ -9,9 +9,9 @@ package handlers
 
 import (
 	"fmt"
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/logger"
-	VpnProto "masterdnsvpn-go/internal/vpnproto"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/logger"
+	VpnProto "masterdns-go/internal/vpnproto"
 	"net"
 )
 

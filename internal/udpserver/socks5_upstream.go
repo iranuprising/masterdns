@@ -17,8 +17,8 @@ import (
 	"strings"
 	"time"
 
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/logger"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/logger"
 )
 
 type upstreamSOCKS5Error struct {

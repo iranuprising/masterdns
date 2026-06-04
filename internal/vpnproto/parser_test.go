@@ -11,8 +11,8 @@ import (
 	"bytes"
 	"testing"
 
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/security"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/security"
 )
 
 func buildRawPacket(

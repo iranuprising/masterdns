@@ -10,7 +10,7 @@ package dnsparser
 import (
 	"encoding/binary"
 
-	Enums "masterdnsvpn-go/internal/enums"
+	Enums "masterdns-go/internal/enums"
 )
 
 const (

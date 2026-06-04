@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"masterdnsvpn-go/internal/config"
+	"masterdns-go/internal/config"
 )
 
 func TestFormatMTULogLineSupportsDomainPlaceholder(t *testing.T) {

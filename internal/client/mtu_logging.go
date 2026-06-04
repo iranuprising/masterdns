@@ -16,7 +16,7 @@ import (
 	"strings"
 	"time"
 
-	"masterdnsvpn-go/internal/logger"
+	"masterdns-go/internal/logger"
 )
 
 const (

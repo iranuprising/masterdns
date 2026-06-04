@@ -3,8 +3,8 @@ package client
 import (
 	"testing"
 
-	Enums "masterdnsvpn-go/internal/enums"
-	"masterdnsvpn-go/internal/mlq"
+	Enums "masterdns-go/internal/enums"
+	"masterdns-go/internal/mlq"
 )
 
 func TestStreamZeroAllowsMultipleQueuedPingsWithDifferentSequence(t *testing.T) {

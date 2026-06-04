@@ -19,10 +19,10 @@ import (
 	"strings"
 	"syscall"
 
-	"masterdnsvpn-go/internal/client"
-	"masterdnsvpn-go/internal/config"
-	"masterdnsvpn-go/internal/runtimepath"
-	"masterdnsvpn-go/internal/version"
+	"masterdns-go/internal/client"
+	"masterdns-go/internal/config"
+	"masterdns-go/internal/runtimepath"
+	"masterdns-go/internal/version"
 )
 
 func samePath(a string, b string) bool {

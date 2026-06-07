@@ -379,19 +379,15 @@ func (c *Client) RunInitialMTUTests(ctx context.Context) error {
 
 	// Wait until at least targetValid (configured or default to 2) valid resolver is found,
 	// or all connections are probed, or context is done.
-	targetValid := 2
-	if c.MinValidResolvers > 0 {
-		targetValid = c.MinValidResolvers
-	}
-	if len(scanConnections) < targetValid {
-		targetValid = len(scanConnections)
-	}
+	targetValid := c.getEffectiveTargetValid()
 
 	for {
 		if ctx.Err() != nil {
 			return ctx.Err()
 		}
 		if c.mtuValid.Load() >= int32(targetValid) {
+			// Small grace period for other in-flight probes to finish and report
+			time.Sleep(200 * time.Millisecond)
 			break
 		}
 		if c.mtuCompleted.Load() == int32(len(scanConnections)) {
@@ -402,11 +398,11 @@ func (c *Client) RunInitialMTUTests(ctx context.Context) error {
 
 	activeConns := c.balancer.ActiveConnections()
 	validConns, minUpload, minDownload, minUploadChars := c.optimizeMTUResolvers(activeConns)
-	if len(validConns) == 0 {
+	if len(validConns) < targetValid {
 		if c.log != nil {
-			c.log.Errorf("<red>No valid connections found after MTU testing!</red>")
+			c.log.Errorf("<red>❌ Found only %d valid resolvers, but profile required at least %d. Connection aborted.</red>", len(validConns), targetValid)
 		}
-		return ErrNoValidConnections
+		return fmt.Errorf("insufficient valid resolvers: found %d, need %d", len(validConns), targetValid)
 	}
 
 	c.applySyncedMTUState(minUpload, minDownload, minUploadChars)
@@ -1620,6 +1616,18 @@ func mtuCryptoOverhead(method int) int {
 	default:
 		return 0
 	}
+}
+
+func (c *Client) getEffectiveTargetValid() int {
+	targetValid := 2
+	if c.MinValidResolvers > 0 {
+		targetValid = c.MinValidResolvers
+	}
+	all := c.balancer.AllConnections()
+	if len(all) < targetValid {
+		targetValid = len(all)
+	}
+	return targetValid
 }
 
 func max(a, b int) int {

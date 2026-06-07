@@ -2158,10 +2158,37 @@ func xorshift64(v uint64) uint64 {
 	return v
 }
 
+func (b *Balancer) GetValidResolvers() []string {
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	res := make([]string, 0, len(b.activeIDs))
+	for _, idx := range b.activeIDs {
+		if idx >= 0 && idx < len(b.connections) {
+			res = append(res, b.connections[idx].ResolverLabel)
+		}
+	}
+	return res
+}
+
+func (b *Balancer) GetRejectedResolvers() []string {
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	res := make([]string, 0, len(b.inactiveIDs))
+	for _, idx := range b.inactiveIDs {
+		if idx >= 0 && idx < len(b.connections) {
+			if b.connections[idx].Tested {
+				res = append(res, b.connections[idx].ResolverLabel)
+			}
+		}
+	}
+	return res
+}
+
 func (b *Balancer) GetConnection(key string) *Connection {
 	b.mu.RLock(); defer b.mu.RUnlock()
 	idx, ok := b.indexByKey[key]
 	if !ok { return nil }
 	return &b.connections[idx]
 }
+
 func (b *Balancer) SetMinValidResolvers(n int) {}

@@ -574,6 +574,22 @@ func (c *Client) GetTrafficStats() map[string]uint64 {
 		"mtuValid": uint64(c.mtuValid.Load()), "mtuRejected": uint64(c.mtuRejected.Load()),
 	}
 }
-func (c *Client) GetValidResolvers() []string { return []string{} }
-func (c *Client) GetRejectedResolvers() []string { return []string{} }
-func (c *Client) SetMinValidResolvers(n int) { if c.balancer != nil { c.balancer.SetMinValidResolvers(n) } }
+func (c *Client) GetValidResolvers() []string {
+	if c.balancer == nil {
+		return []string{}
+	}
+	return c.balancer.GetValidResolvers()
+}
+
+func (c *Client) GetRejectedResolvers() []string {
+	if c.balancer == nil {
+		return []string{}
+	}
+	return c.balancer.GetRejectedResolvers()
+}
+func (c *Client) SetMinValidResolvers(n int) {
+	c.MinValidResolvers = n
+	if c.balancer != nil {
+		c.balancer.SetMinValidResolvers(n)
+	}
+}

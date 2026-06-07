@@ -117,6 +117,8 @@ func (c *Client) resetRuntimeBindings(resetSession bool) {
 	c.clearPlannerQueueSpaceSignal()
 	c.clearWriterQueueSpaceSignal()
 	c.clearSessionResetPending()
+	c.txTotalBytes.Store(0)
+	c.rxTotalBytes.Store(0)
 	if resetSession {
 		c.resetSessionState(true)
 	}
@@ -798,6 +800,7 @@ func (c *Client) asyncWriterWorker(ctx context.Context, id int, conn *net.UDPCon
 						now,
 						c.tunnelPacketTimeout,
 					)
+					c.txTotalBytes.Add(uint64(len(frame.packet)))
 				}
 			}
 			if !task.wasPacked && task.selected != nil {
@@ -843,6 +846,8 @@ func (c *Client) asyncReaderWorker(ctx context.Context, id int, conn *net.UDPCon
 				c.udpBufferPool.Put(buf)
 				continue
 			}
+
+			c.rxTotalBytes.Add(uint64(n))
 
 			packetData := buf[:n]
 

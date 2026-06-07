@@ -84,7 +84,7 @@ type mtuDecision struct {
 	resolveTime   time.Duration
 }
 
-func (c *Client) optimizeMTUResolvers(connections []Connection) ([]Connection, int, int, int) {
+func (c *Client) optimizeMTUResolvers(connections []Connection, targetValid int) ([]Connection, int, int, int) {
 	if !c.cfg.AutoRemoveLowMTUServers {
 		return summarizeValidMTUConnections(connections)
 	}
@@ -144,8 +144,18 @@ func (c *Client) optimizeMTUResolvers(connections []Connection) ([]Connection, i
 	}
 
 	maxAllowedDrops := int(float64(totalValid) * maxDropRatio)
+	
+	// Ensure we never drop below targetValid
+	if totalValid > targetValid {
+		if maxAllowedDrops > totalValid-targetValid {
+			maxAllowedDrops = totalValid - targetValid
+		}
+	} else {
+		maxAllowedDrops = 0
+	}
+
 	if maxAllowedDrops < 1 {
-		maxAllowedDrops = 1
+		return summarizeValidMTUConnections(validConns)
 	}
 
 	const (
@@ -396,8 +406,11 @@ func (c *Client) RunInitialMTUTests(ctx context.Context) error {
 		time.Sleep(50 * time.Millisecond)
 	}
 
+	// Mark initial scan phase as done to prevent background workers from corrupting state
+	c.mtuInitialScanDone.Store(true)
+
 	activeConns := c.balancer.ActiveConnections()
-	validConns, minUpload, minDownload, minUploadChars := c.optimizeMTUResolvers(activeConns)
+	validConns, minUpload, minDownload, minUploadChars := c.optimizeMTUResolvers(activeConns, targetValid)
 	if len(validConns) < targetValid {
 		if c.log != nil {
 			c.log.Errorf("<red>❌ Found only %d valid resolvers, but profile required at least %d. Connection aborted.</red>", len(validConns), targetValid)
@@ -412,6 +425,10 @@ func (c *Client) RunInitialMTUTests(ctx context.Context) error {
 }
 
 func (c *Client) reoptimizeOnBackgroundResolverFound() {
+	if c.mtuInitialScanDone.Load() {
+		return
+	}
+
 	c.resolverConnsMu.Lock()
 	defer c.resolverConnsMu.Unlock()
 

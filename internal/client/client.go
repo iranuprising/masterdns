@@ -93,6 +93,7 @@ type Client struct {
 	sessionResetPending   atomic.Bool
 	runtimeResetPending   atomic.Bool
 	resolverHealthStarted atomic.Bool
+	mtuInitialScanDone    atomic.Bool
 	sessionResetSignal    chan struct{}
 	rxDroppedPackets      atomic.Uint64
 	lastRXDropLogUnix     atomic.Int64

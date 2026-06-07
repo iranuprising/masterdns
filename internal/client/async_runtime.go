@@ -241,6 +241,7 @@ func (c *Client) resetSessionState(resetSessionCookie bool) {
 		return
 	}
 	c.sessionReady = false
+	c.mtuInitialScanDone.Store(false)
 	c.sessionID = 0
 	if resetSessionCookie {
 		c.sessionCookie = 0
